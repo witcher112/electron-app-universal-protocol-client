@@ -7,6 +7,22 @@ import TypedEmitter from 'typed-emitter';
 
 const bindings = require(`./bindings`);
 
+let electronAppUniversalProtocolClientStartupRequestUrl: string | undefined;
+
+if (os.platform() === `darwin`) {
+
+  electron.app.once(
+    `open-url`,
+    (
+      _event,
+      url,
+    ) => {
+
+      electronAppUniversalProtocolClientStartupRequestUrl = url;
+    },
+  );
+}
+
 type ElectronAppUniversalProtocolClientEvents = {
   request: (requestUrl: string) => void;
 }
@@ -110,6 +126,14 @@ class ElectronAppUniversalProtocolClient extends (EventEmitter as new () => Type
           electronBundlePath,
           protocol,
         );
+      }
+
+      if (electronAppUniversalProtocolClientStartupRequestUrl !== undefined) {
+
+        if (electronAppUniversalProtocolClientStartupRequestUrl.startsWith(protocol)) {
+
+          this.emit(`request`, electronAppUniversalProtocolClientStartupRequestUrl);
+        }
       }
 
       electron.app.setAsDefaultProtocolClient(protocol);
