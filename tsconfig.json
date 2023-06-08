@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "strict": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noResolve": false,
+    "declaration": true,
+    "newLine": "lf",
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": false,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false,
+    "target": "ES5",
+    "incremental": false,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

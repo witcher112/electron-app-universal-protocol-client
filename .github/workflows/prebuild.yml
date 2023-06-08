@@ -1,0 +1,37 @@
+name: Prebuild
+
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  prebuild:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version:
+          - ^14.0.0
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install -g yarn
+      - run: yarn
+      - run: yarn prebuildify --napi --tag-armv --tag-uv
+      - uses: thedoctor0/zip-release@0.7.1
+        with:
+          directory: './prebuilds'
+          type: zip
+          filename: ../${{ matrix.os }}.zip
+      - uses: ncipollo/release-action@v1.12.0
+        with:
+          allowUpdates: true
+          artifacts: ${{ matrix.os }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
