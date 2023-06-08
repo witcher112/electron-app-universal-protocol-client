@@ -13,7 +13,7 @@
     "README.md"
   ],
   "scripts": {
-    "install": "node-gyp-build",
+    "install": "echo 'Using prebuilds'",
     "build": "tsc"
   },
   "dependencies": {
