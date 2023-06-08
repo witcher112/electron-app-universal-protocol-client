@@ -171,16 +171,25 @@ class ElectronAppUniversalProtocolClient extends (EventEmitter as new () => Type
         argv,
       ) => {
 
-        const requestUrl = argv.find(
+        const secondInstanceRequestUrl = argv.find(
           (arg) => arg.startsWith(`${protocol}`),
         );
 
-        if (requestUrl !== undefined) {
+        if (secondInstanceRequestUrl !== undefined) {
 
-          this.emit(`request`, requestUrl);
+          this.emit(`request`, secondInstanceRequestUrl);
         }
       },
     );
+
+    const mainInstanceRequestUrl = process.argv.find(
+      (arg) => arg.startsWith(`${protocol}`),
+    );
+
+    if (mainInstanceRequestUrl !== undefined) {
+
+      this.emit(`request`, mainInstanceRequestUrl);
+    }
 
     this.isInitialized = true;
   }
