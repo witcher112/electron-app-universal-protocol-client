@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - ^14.0.0
+          - 16.16.0
         os:
           - windows-latest
           - macos-latest
