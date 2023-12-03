@@ -1,5 +1,14 @@
 # About
 
+Unified and simplified API for Electron application's protocol handlers ("deep links").
+
+Features:
+- support for all platforms (Windows, macOS nad Linux)
+- development mode
+- capturing start-up request (if application was not running and protocol request caused it to be started)
+
+## electron-deeplink
+
 This package is based on [electron-deeplink](https://github.com/glawson/electron-deeplink).
 
 Differences:
@@ -11,6 +20,10 @@ Differences:
 - removed a lot of default behavior (like focusing the window after protocol request)
 - removed logging support
 - minor fixes
+
+Further changes are listed in [CHANGELOG.md](./CHANGELOG.md).
+
+Huge thanks for @glawson for creating `electron-deeplink` and allowing me to continue his work as recommended fork.
 
 # Installation
 
@@ -48,4 +61,19 @@ await electronAppUniversalProtocolClient.initialize({
 
 ## Development mode
 
-Make sure you're launching Electron with your main script as first argument. Development mode is made upon this assumption.
+Make sure you're launching Electron with your **main script absolute path*** as first argument. Development mode is made upon this assumption.
+
+\* - absolute path is required as protocol request could start your Electron application with different current working directory
+
+## macOS Development Mode Permissions Issue
+
+Due to macOS permissions system, you could experience following errors after starting your Electron app in development mode:
+```
+[42590:1203/200159.650790:ERROR:mach_port_rendezvous.cc(310)] bootstrap_look_up com.github.my-app-id.MachPortRendezvousServer.42588: Permission denied (1100)
+[42590:1203/200159.651421:ERROR:child_thread_impl.cc(228)] Mach rendezvous failed, terminating process (parent died?)
+```
+
+To fix them, run this command in project's root directory:
+```
+sudo xattr -r -d com.apple.quarantine ./
+```
