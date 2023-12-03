@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "install": "echo 'Using prebuilds'",
-    "build": "tsc"
+    "build": "tsc",
+    "example": "electron example/main.js"
   },
   "dependencies": {
     "node-addon-api": "^2.0.0",
