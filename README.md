@@ -3,7 +3,7 @@
 Unified and simplified API for Electron application's protocol handlers ("deep links").
 
 Features:
-- support for all platforms (Windows, macOS nad Linux)
+- support for all platforms (Windows, macOS and Linux)
 - development mode
 - capturing start-up request (if application was not running and protocol request caused it to be started)
 
@@ -58,7 +58,7 @@ Initialize the client.
 
 `mode` is `'production'` by default.
 
-**Remember to register protocol handlers before calling `initialize`, otherwise you might loose some requests.**
+**Remember to register protocol handlers before calling `initialize`, otherwise you might lose some requests.**
 
 ```js
 await electronAppUniversalProtocolClient.initialize({
