@@ -15,6 +15,7 @@ jobs:
         os:
           - windows-latest
           - macos-latest
+          - macos-latest-xlarge
           - ubuntu-latest
     steps:
       - uses: actions/checkout@v3
