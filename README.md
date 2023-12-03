@@ -61,9 +61,7 @@ await electronAppUniversalProtocolClient.initialize({
 
 ## Development mode
 
-Make sure you're launching Electron with your **main script absolute path*** as first argument. Development mode is made upon this assumption.
-
-\* - absolute path is required as protocol request could start your Electron application with different current working directory
+Make sure you're launching Electron with your **main script path*** as first argument. Development mode is made upon this assumption.
 
 ## macOS Development Mode Permissions Issue
 
