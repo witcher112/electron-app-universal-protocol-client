@@ -37,33 +37,45 @@ $ yarn add electron-app-universal-protocol-client
 
 # Usage
 
-## Example
+## API
 
-```
-import electronAppUniversalProtocolClient from 'electron-app-universal-protocol-client';
+### `electronAppUniversalProtocolClient.on('request', requestHandler)`
 
-// create window, initialize other stuff
+Register handler for protocol requests in your application.
 
+```js
 electronAppUniversalProtocolClient.on(
   'request',
-  (requestUrl) => {
-
-    // handle the request
+  async (requestUrl) => {
+    // Handle the request
   },
 );
-
-await electronAppUniversalProtocolClient.initialize({
-  protocol: 'your-app-id',
-  mode: 'development', // if running in dev mode, otherwise use 'production' or skip
-});
-
 ```
 
-## Development mode
+### `electronAppUniversalProtocolClient.initialize({ protocol: string; mode?: 'development' | 'production' })`
 
-Make sure you're launching Electron with your **main script path*** as first argument. Development mode is made upon this assumption.
+Initialize the client.
 
-## macOS Development Mode Permissions Issue
+`mode` is `'production'` by default.
+
+**Remember to register protocol handlers before calling `initialize`, otherwise you might loose some requests.**
+
+```js
+await electronAppUniversalProtocolClient.initialize({
+  protocol: 'your-app-id',
+  mode: 'development', // Make sure to use 'production' when script is executed in bundled app
+});
+```
+
+## [Example](./example/main.js)
+
+Please note that example directory contains fake `node_modules` that allows the example to be started within this repository.
+
+# Development mode
+
+Make sure you're launching Electron with your **main script path** as first argument. Development mode is implemented upon this assumption.
+
+# macOS Development Mode Permissions Issue
 
 Due to macOS permissions system, you could experience following errors after starting your Electron app in development mode:
 ```
