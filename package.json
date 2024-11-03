@@ -8,23 +8,22 @@
   "files": [
     "dist",
     "prebuilds",
-    "binding.gyp",
     "package.json",
     "README.md"
   ],
   "scripts": {
-    "install": "echo 'Using prebuilds'",
     "build": "tsc",
-    "example": "electron example/main.js"
+    "example": "electron example/main.js",
+    "download-prebuilds": "prebuildify-ci download"
   },
   "dependencies": {
-    "node-addon-api": "^2.0.0",
-    "node-gyp-build": "^4.0.0",
     "typed-emitter": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.0",
     "electron": "^12.0.0",
+    "node-addon-api": "^2.0.0",
+    "node-gyp-build": "^4.0.0",
     "node-gyp": "^9.0.0",
     "prebuildify-ci": "^1.0.0",
     "prebuildify": "^4.0.0",

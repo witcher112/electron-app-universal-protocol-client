@@ -7,7 +7,19 @@ import { execSync } from 'child_process';
 import { EventEmitter } from 'events';
 import TypedEmitter from 'typed-emitter';
 
-const bindings = require(`./bindings`);
+let setDevAppAsDefaultProtocolClient: (electronBundlePath: string, protocol: string) => void = () => {};
+
+if (process.platform === `darwin`) {
+
+  if (process.arch === `x64`) {
+
+    setDevAppAsDefaultProtocolClient = require(`../prebuilds/darwin-x64/node.napi.uv1.node`).setDevAppAsDefaultProtocolClient;
+
+  } else if (process.arch === `arm64`) {
+
+    setDevAppAsDefaultProtocolClient = require(`../prebuilds/darwin-arm64/node.napi.uv1.armv8.node`).setDevAppAsDefaultProtocolClient;
+  }
+}
 
 let electronAppUniversalProtocolClientStartupRequestUrl: string | undefined;
 
@@ -124,7 +136,7 @@ class ElectronAppUniversalProtocolClient extends (EventEmitter as new () => Type
           electronBundleInfoPlistContents,
         );
 
-        bindings.setDevAppAsDefaultProtocolClient(
+        setDevAppAsDefaultProtocolClient(
           electronBundlePath,
           protocol,
         );
