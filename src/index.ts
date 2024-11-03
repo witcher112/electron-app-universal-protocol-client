@@ -278,4 +278,6 @@ class ElectronAppUniversalProtocolClient extends (EventEmitter as new () => Type
   }
 }
 
-export default new ElectronAppUniversalProtocolClient();
+export const electronAppUniversalProtocolClient = new ElectronAppUniversalProtocolClient();
+
+export default electronAppUniversalProtocolClient;

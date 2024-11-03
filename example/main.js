@@ -1,6 +1,6 @@
 const electron = require('electron');
 
-const electronAppUniversalProtocolClient = require('electron-app-universal-protocol-client').default;
+const { electronAppUniversalProtocolClient } = require('electron-app-universal-protocol-client');
 
 // Usually you want to run only one instance of your app to handle all requests in one context
 
@@ -31,7 +31,7 @@ electron.app.on('ready', async () => {
   );
 
   await electronAppUniversalProtocolClient.initialize({
-    protocol: 'your-app-id',
+    protocol: 'your-app-id3',
     mode: 'development', // Make sure to use 'production' when script is executed in bundled app
   });
 
