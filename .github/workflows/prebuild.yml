@@ -20,6 +20,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - run: python3 -m pip install setuptools
       - run: npm install -g yarn
       - run: yarn
